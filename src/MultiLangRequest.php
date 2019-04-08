@@ -42,12 +42,12 @@ class MultiLangRequest extends Request
 
 	    	$lang_url = isset($url_list[1]) ? $url_list[1] : null;
 
-            if ($lang_url == \Yii::$app->project->default_lang)
+            if ($lang_url == \Yii::$app->multiLanguage->default_lang)
             {
                 return $this->_lang_url;
             }
 
-            if (!in_array($lang_url, \Yii::$app->project->langs))
+            if (!in_array($lang_url, \Yii::$app->multiLanguage->langs))
             {
                 return $this->_lang_url;
             }

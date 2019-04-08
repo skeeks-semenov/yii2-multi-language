@@ -37,7 +37,7 @@ class MultiLangUrlManager extends UrlManager
         //Получаем сформированный URL(без префикса идентификатора языка)
         $url = parent::createUrl($params);
 
-        if ($lang == \Yii::$app->project->default_lang) {
+        if ($lang == \Yii::$app->multiLanguage->default_lang) {
             return $url;
         }
 
