@@ -19,18 +19,10 @@ class MultiLangComponent extends \yii\base\Component
     /**
      * @var array доступные языки
      */
-    public $langs = ['ru', 'en', 'es'];
+    public $langs = ['ru', 'en'];
 
     /**
      * @var string язык проекта по умолчанию
      */
     public $default_lang = 'ru';
-
-    /**
-     * @return string
-     */
-    public function getWidgetSuffix()
-    {
-        return (\Yii::$app->language == $this->default_lang ? "" : "-".\Yii::$app->language);
-    }
 }

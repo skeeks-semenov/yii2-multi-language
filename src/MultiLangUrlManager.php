@@ -29,22 +29,34 @@ class MultiLangUrlManager extends UrlManager
     public function createUrl($params)
     {
         if (isset($params[static::LANG_PARAM_NAME])) {
-            //Если указан идентификатор языка, то делаем попытку найти язык в БД,
-            //иначе работаем с языком по умолчанию
             $lang = $params[static::LANG_PARAM_NAME];
-            unset($params[static::LANG_PARAM_NAME]);
+            //unset($params[static::LANG_PARAM_NAME]);
         } else {
             //Если не указан параметр языка, то работаем с текущим языком
             $lang = \Yii::$app->language;
+            $params[static::LANG_PARAM_NAME] = $lang;
             //$lang = 'ru';
+        }
+
+        //Если урл вида /url/test то нужно убрать из параметров язык, поскольку он будет содержатся не в параметра а в pathInfo
+        if ($this->enablePrettyUrl) {
+            unset($params[static::LANG_PARAM_NAME]);
+        }
+
+        //Если указанный язык = отображаемому на сайте по умолчанию, то не нужно менять урл
+        if ($lang == \Yii::$app->multiLanguage->default_lang) {
+            return parent::createUrl($params);
+        }
+
+        /**
+         * Работает только с enablePrettyUrl
+         */
+        if (!$this->enablePrettyUrl) {
+            return parent::createUrl($params);
         }
 
         //Получаем сформированный URL(без префикса идентификатора языка)
         $url = parent::createUrl($params);
-
-        if ($lang == \Yii::$app->multiLanguage->default_lang) {
-            return $url;
-        }
 
         //Url absolute
         if (strpos($url, '://') !== false) {
@@ -65,10 +77,16 @@ class MultiLangUrlManager extends UrlManager
             return "//".$this->unparse_url($urlData);
 
         } else {
-            if ($url == '/' || $url == '') {
-                return '/'.$lang;
+            if ($url == '' || $url == "/") {
+                //Поддерживаем только суффикс "/" для поддержки других суффиксов, нужно это учесть в MultiLangRequest
+                if ($this->suffix == "/") {
+                    $suffix = "/";
+                } else {
+                    $suffix = "";
+                }
+                return '/' . $lang . $suffix;
             } else {
-                return '/'.$lang.$url;
+                return '/' . $lang . $url;
             }
         }
     }
