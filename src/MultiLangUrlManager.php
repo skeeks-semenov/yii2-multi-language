@@ -18,16 +18,21 @@ use yii\web\UrlManager;
 class MultiLangUrlManager extends UrlManager
 {
     /**
+     *
+     */
+    const LANG_PARAM_NAME = "lang";
+
+    /**
      * @param array|string $params
      * @return string
      */
     public function createUrl($params)
     {
-        if (isset($params['lang'])) {
+        if (isset($params[static::LANG_PARAM_NAME])) {
             //Если указан идентификатор языка, то делаем попытку найти язык в БД,
             //иначе работаем с языком по умолчанию
-            $lang = $params['lang'];
-            unset($params['lang']);
+            $lang = $params[static::LANG_PARAM_NAME];
+            unset($params[static::LANG_PARAM_NAME]);
         } else {
             //Если не указан параметр языка, то работаем с текущим языком
             $lang = \Yii::$app->language;
