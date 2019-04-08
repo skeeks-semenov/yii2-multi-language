@@ -7,6 +7,7 @@ Component for multilingual site
 [![Latest Stable Version](https://poser.pugx.org/skeeks/yii2-multi-language/v/stable.png)](https://packagist.org/packages/skeeks/yii2-multi-language)
 [![Total Downloads](https://poser.pugx.org/skeeks/yii2-multi-language/downloads.png)](https://packagist.org/packages/skeeks/yii2-multi-language)
 
+
 Installation
 ------------
 

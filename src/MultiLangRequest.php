@@ -18,6 +18,7 @@ use yii\web\Request;
  */
 class MultiLangRequest extends Request
 {
+
     /**
      * @var
      */

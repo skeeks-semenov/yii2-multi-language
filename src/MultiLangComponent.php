@@ -8,6 +8,7 @@
 
 namespace skeeks\yii2\multiLanguage;
 
+
 /**
  * @property string $widgetSuffix
  *
