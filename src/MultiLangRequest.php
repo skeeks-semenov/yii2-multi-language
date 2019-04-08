@@ -8,7 +8,6 @@
 
 namespace skeeks\yii2\multiLanguage;
 
-use Yii;
 use yii\base\InvalidConfigException;
 use yii\web\Application;
 use yii\web\Request;
@@ -23,91 +22,69 @@ class MultiLangRequest extends Request
      * @var
      */
     private $_lang_url;
+    /**
+     * @var
+     */
+    private $_lang_from_url;
 
     /**
      * @return bool|string
      * @throws InvalidConfigException
      */
-    public function getLangUrl()
+    public function getUrl()
     {
-        if (!\Yii::$app instanceof Application)
-        {
+        //Работает только для web проекта
+        if (!\Yii::$app instanceof Application) {
             return '';
         }
 
         if ($this->_lang_url === null) {
-	        $this->_lang_url = $this->getUrl();
+            //Содержит строку с префиксом языка
+            $this->_lang_url = parent::getUrl();
 
-	    	$url_list = explode('/', $this->_lang_url);
+            //Из строки выделяем язык
+            $url_list = explode('/', $this->_lang_url);
+            $lang_from_url = isset($url_list[1]) ? $url_list[1] : null;
 
-	    	$lang_url = isset($url_list[1]) ? $url_list[1] : null;
-
-            if ($lang_url == \Yii::$app->multiLanguage->default_lang)
-            {
+            //Если этого языка нет среди доступных в настройках компонента, значит это не язык, просто возвращаем строку по сути определенную в parent::getUrl();
+            if (!in_array($lang_from_url, \Yii::$app->multiLanguage->langs)) {
                 return $this->_lang_url;
             }
 
-            if (!in_array($lang_url, \Yii::$app->multiLanguage->langs))
-            {
+            //Если этот язык является языком по умолчанию
+            if ($lang_from_url == \Yii::$app->multiLanguage->default_lang) {
+                //TODO: преобразовать
                 return $this->_lang_url;
             }
 
-            \Yii::$app->language = $lang_url;
-            \Yii::$app->setHomeUrl(\Yii::$app->homeUrl . $lang_url);
+            $this->_lang_from_url = $lang_from_url;
+            //В настройки проекта записываем язык из строки запроса
+            \Yii::$app->language = $lang_from_url;
+            //Определение home page url, возможно тут надо переделать возможно надо переписать метод Request::getBaseUrl();
+            \Yii::$app->homeUrl = \Yii::$app->homeUrl . $lang_from_url;
 
-                if( $lang_url !== null && $lang_url === $lang_url &&
-				strpos($this->_lang_url, $lang_url) === 1 )
-                {
-                     $this->_lang_url = substr($this->_lang_url, strlen($lang_url)+1);
-                }
+
+            //Если в запросе есть указание языка, то его нужно вырезать
+            if ($lang_from_url !== null && strpos($this->_lang_url, $lang_from_url) === 1) {
+                $this->_lang_url = substr($this->_lang_url, strlen($lang_from_url) + 1);
+            }
         }
 
         return $this->_lang_url;
     }
 
-    protected function resolvePathInfo()
+
+    /**
+     * @return null|string
+     */
+    public function getHostInfo()
     {
-        $pathInfo = $this->getLangUrl();
+        $hostInfo = parent::getHostInfo();
 
-        if (($pos = strpos($pathInfo, '?')) !== false) {
-            $pathInfo = substr($pathInfo, 0, $pos);
+        if ($this->_lang_from_url) {
+            $hostInfo = $hostInfo . "/" . $this->_lang_from_url;
         }
 
-        $pathInfo = urldecode($pathInfo);
-
-        // try to encode in UTF8 if not so
-        // http://w3.org/International/questions/qa-forms-utf-8.html
-        if (!preg_match('%^(?:
-            [\x09\x0A\x0D\x20-\x7E]              # ASCII
-            | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
-            | \xE0[\xA0-\xBF][\x80-\xBF]         # excluding overlongs
-            | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
-            | \xED[\x80-\x9F][\x80-\xBF]         # excluding surrogates
-            | \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
-            | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
-            | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
-            )*$%xs', $pathInfo)
-        ) {
-            $pathInfo = utf8_encode($pathInfo);
-        }
-
-        $scriptUrl = $this->getScriptUrl();
-        $baseUrl = $this->getBaseUrl();
-        if (strpos($pathInfo, $scriptUrl) === 0) {
-            $pathInfo = substr($pathInfo, strlen($scriptUrl));
-        } elseif ($baseUrl === '' || strpos($pathInfo, $baseUrl) === 0) {
-            $pathInfo = substr($pathInfo, strlen($baseUrl));
-        } elseif (isset($_SERVER['PHP_SELF']) && strpos($_SERVER['PHP_SELF'], $scriptUrl) === 0) {
-            $pathInfo = substr($_SERVER['PHP_SELF'], strlen($scriptUrl));
-        } else {
-            throw new InvalidConfigException('Unable to determine the path info of the current request.');
-        }
-
-        if (isset($pathInfo[0]) && $pathInfo[0] === '/') {
-            $pathInfo = substr($pathInfo, 1);
-        }
-
-        //print_r($pathInfo);die;
-        return (string) $pathInfo;
+        return $hostInfo;
     }
 }

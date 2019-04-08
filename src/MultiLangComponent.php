@@ -19,7 +19,7 @@ class MultiLangComponent extends \yii\base\Component
     /**
      * @var array доступные языки
      */
-    public $langs = ['ru', 'en'];
+    public $langs = ['ru', 'en', 'es'];
 
     /**
      * @var string язык проекта по умолчанию
