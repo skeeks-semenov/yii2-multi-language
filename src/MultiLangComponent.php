@@ -6,7 +6,7 @@
  * @author Semenov Alexander <semenov@skeeks.com>
  */
 
-namespace \skeeks\yii2\multiLanguage;
+namespace skeeks\yii2\multiLanguage;
 
 /**
  * @property string $widgetSuffix
