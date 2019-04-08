@@ -1,0 +1,28 @@
+{
+    "name": "skeeks/yii2-multi-language",
+    "description": "Component for multilingual site",
+    "keywords": [
+        "text",
+        "links"
+    ],
+    "homepage": "https://cms.skeeks.com",
+    "license": "BSD-3-Clause",
+    "type": "yii2-extension",
+    "support": {
+        "authors": "https://skeeks.com"
+    },
+    "authors": [
+        {
+            "name": "Semenov Alexander",
+            "email": "semenov@skeeks.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "^2.0.17 || dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "skeeks\\yii2\\multiLanguage\\": "src/"
+        }
+    }
+}
