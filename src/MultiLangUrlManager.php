@@ -18,29 +18,25 @@ use yii\web\UrlManager;
 class MultiLangUrlManager extends UrlManager
 {
     /**
-     *
-     */
-    const LANG_PARAM_NAME = "lang";
-
-    /**
      * @param array|string $params
      * @return string
      */
     public function createUrl($params)
     {
-        if (isset($params[static::LANG_PARAM_NAME])) {
-            $lang = $params[static::LANG_PARAM_NAME];
-            //unset($params[static::LANG_PARAM_NAME]);
+        if (isset($params[\Yii::$app->multiLanguage->lang_param_name])) {
+            $lang = $params[\Yii::$app->multiLanguage->lang_param_name];
+            //unset($params[\Yii::$app->multiLanguage->lang_param_name]);
         } else {
             //Если не указан параметр языка, то работаем с текущим языком
             $lang = \Yii::$app->language;
-            $params[static::LANG_PARAM_NAME] = $lang;
+            $params[\Yii::$app->multiLanguage->lang_param_name] = $lang;
             //$lang = 'ru';
         }
 
+
         //Если урл вида /url/test то нужно убрать из параметров язык, поскольку он будет содержатся не в параметра а в pathInfo
         if ($this->enablePrettyUrl) {
-            unset($params[static::LANG_PARAM_NAME]);
+            unset($params[\Yii::$app->multiLanguage->lang_param_name]);
         }
 
         //Если указанный язык = отображаемому на сайте по умолчанию, то не нужно менять урл
@@ -57,6 +53,9 @@ class MultiLangUrlManager extends UrlManager
 
         //Получаем сформированный URL(без префикса идентификатора языка)
         $url = parent::createUrl($params);
+
+                /*print_r($lang);
+                print_r($url);*/
 
         //Url absolute
         if (strpos($url, '://') !== false) {
