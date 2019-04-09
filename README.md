@@ -52,6 +52,15 @@ Use config your application
     
 ]
 ```
+
+Example
+-----
+```php
+
+Url::to(['/module/controller/action', 'id' => 20, 'lang' => 'en'])
+// /en/module/controller/action?id=20
+
+```
 Screenshot
 ----------
 
