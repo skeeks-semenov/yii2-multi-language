@@ -74,12 +74,15 @@ class MultiLangRequest extends Request
     }
 
 
+    public $hostInfoNoLang = "";
+
     /**
      * @return null|string
      */
     public function getHostInfo()
     {
         $hostInfo = parent::getHostInfo();
+        $this->hostInfoNoLang = $hostInfo;
 
         if ($this->_lang_from_url) {
             $hostInfo = $hostInfo . "/" . $this->_lang_from_url;

@@ -54,9 +54,12 @@ class MultiLangUrlManager extends UrlManager
         //Получаем сформированный URL(без префикса идентификатора языка)
         $url = parent::createUrl($params);
 
-                /*print_r($lang);
-                print_r($url);*/
-
+        /*print_r($lang);
+        echo "\n";
+        print_r($url);
+        echo "\n";
+        echo "\n";
+        echo "\n";*/
         //Url absolute
         if (strpos($url, '://') !== false) {
             $urlData = parse_url($url);
@@ -64,7 +67,7 @@ class MultiLangUrlManager extends UrlManager
             if ($path == "/") {
                 $path = "";
             }
-            $urlData['path'] = "/".$lang.$path;
+            $urlData['path'] = "/" . $lang . $path;
             return $this->unparse_url($urlData);
         } else if (strpos($url, '//') !== false) {
             $urlData = parse_url($url);
@@ -88,6 +91,24 @@ class MultiLangUrlManager extends UrlManager
                 return '/' . $lang . $url;
             }
         }
+    }
+
+    /**
+     * @param array|string $params
+     * @param null         $scheme
+     * @return string
+     */
+    public function createAbsoluteUrl($params, $scheme = null)
+    {
+        $tmpHostInfo = $this->hostInfo;
+        $request = \Yii::$app->request;
+        if ($request instanceof MultiLangRequest) {
+            $request->getHostInfo();
+            $this->hostInfo = $request->hostInfoNoLang;
+        }
+        $url = parent::createAbsoluteUrl($params, $scheme);
+        $this->hostInfo = $tmpHostInfo;
+        return $url;
     }
 
     /**

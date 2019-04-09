@@ -1,7 +1,7 @@
 Component for multilingual site
 ================
 
-[<img src="https://skeeks.com/uploads/all/20/9e/a0/209ea08c3331e48573e6acbff8981990.png" alt="SkeekS blog" width="200"/>](https://skeeks.com/blog/programming/397-kak-preobrazovat-neaktivnye-ssylki-v-tekste-v-aktivnye-klikabelnye)
+[<img src="https://skeeks.com/uploads/all/4c/fd/50/4cfd50a535aef7c753b12c4adfbc0e33.png" alt="SkeekS blog" width="200"/>](https://skeeks.com/blog/programming/397-kak-preobrazovat-neaktivnye-ssylki-v-tekste-v-aktivnye-klikabelnye)
 
 [![Latest Stable Version](https://poser.pugx.org/skeeks/yii2-multi-language/v/stable.png)](https://packagist.org/packages/skeeks/yii2-multi-language)
 [![Total Downloads](https://poser.pugx.org/skeeks/yii2-multi-language/downloads.png)](https://packagist.org/packages/skeeks/yii2-multi-language)
@@ -24,20 +24,41 @@ Or add this to your `composer.json` file:
 }
 ```
 
-Use
+Use config your application
 -----
 
+```php
 
+"bootstrap" => ["multiLanguage"],
+
+"components" => [
+
+    "request" => [
+        "class" => \skeeks\yii2\multiLanguage\MultiLangRequest::class
+    ],
+    
+    "urlManager" => [
+        "class" => \skeeks\yii2\multiLanguage\MultiLangUrlManager::class,
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
+    ],
+    
+    "multiLanguage" => [
+        "class" => \skeeks\yii2\multiLanguage\MultiLangComponent::class,
+        'langs' => ['ru', 'en'],
+        'default_lang' => 'ru',
+        'lang_param_name' => 'lang',
+    ]
+    
+]
+```
 Screenshot
 ----------
-
-[<img src="https://skeeks.com/uploads/all/7c/cb/dc/7ccbdc8a1393cdb88d87635b610fb108.png" alt="SkeekS blog" width="600"/>](https://skeeks.com/uploads/all/7c/cb/dc/7ccbdc8a1393cdb88d87635b610fb108.png)
 
 
 Video
 -----
 
-[<img src="https://skeeks.com/uploads/all/e4/cf/10/e4cf1067b25a0ca815ea2c82b5703e71.png" alt="Video" width="557"/>](https://youtu.be/lzmuahaNwQQ)
 
 Links
 ----------
