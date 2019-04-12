@@ -66,6 +66,11 @@ Url::to(['/module/controller/action', 'id' => 20, 'lang' => 'en'])
 Screenshot
 ----------
 
+[<img src="https://cms.skeeks.com/uploads/all/f5/fa/f6/f5faf6b3be0dd01e0e368c9280d77e88.png" alt="SkeekS blog" width="600"/>](https://cms.skeeks.com/uploads/all/f5/fa/f6/f5faf6b3be0dd01e0e368c9280d77e88.png)
+
+[<img src="https://cms.skeeks.com/uploads/all/0c/1c/f5/0c1cf53c64d3e13ff4abeb4208d4c9ea.png" alt="SkeekS blog" width="600"/>](https://cms.skeeks.com/uploads/all/0c/1c/f5/0c1cf53c64d3e13ff4abeb4208d4c9ea.png)
+
+
 
 Video
 -----
