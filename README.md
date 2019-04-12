@@ -1,7 +1,7 @@
 Component for multilingual site
 ================
 
-[<img src="https://skeeks.com/uploads/all/4c/fd/50/4cfd50a535aef7c753b12c4adfbc0e33.png" alt="SkeekS blog" width="200"/>](https://skeeks.com/blog/programming/397-kak-preobrazovat-neaktivnye-ssylki-v-tekste-v-aktivnye-klikabelnye)
+[<img src="https://cms.skeeks.com/uploads/all/4f/46/71/4f46711c4f5e78d9b0ce187abe88fd04.png" alt="SkeekS blog" width="200"/>](https://cms.skeeks.com/marketplace/components/tools/401-yii2-komponent-dlya-multiyazychnosti-sajta)
 
 [![Latest Stable Version](https://poser.pugx.org/skeeks/yii2-multi-language/v/stable.png)](https://packagist.org/packages/skeeks/yii2-multi-language)
 [![Total Downloads](https://poser.pugx.org/skeeks/yii2-multi-language/downloads.png)](https://packagist.org/packages/skeeks/yii2-multi-language)
@@ -82,9 +82,8 @@ Links
 * [Changelog](https://github.com/skeeks-semenov/yii2-multi-language/blob/master/CHANGELOG.md)
 * [Issues](https://github.com/skeeks-semenov/yii2-multi-language/issues)
 * [Packagist](https://packagist.org/packages/skeeks/yii2-multi-language)
-
-* [SkeekS blog post](https://skeeks.com/blog/programming/397-kak-preobrazovat-neaktivnye-ssylki-v-tekste-v-aktivnye-klikabelnye)
-* [SkeekS marketplace](https://cms.skeeks.com/marketplace/components/tools/other/396-preobrazovanie-neaktivnyh-ssylok-v-tekste)
+* [SkeekS blog post](https://cms.skeeks.com/blog/404-kak-v-yii2-proekte-sdelat-multiyazychnye-url)
+* [SkeekS marketplace](https://cms.skeeks.com/marketplace/components/tools/401-yii2-komponent-dlya-multiyazychnosti-sajta)
 
 ___
 
