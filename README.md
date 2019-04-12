@@ -11,7 +11,7 @@ Installation
 ------------
 
 ```sh
-$ composer require skeeks/yii2-multi-language "^0.0.1"
+$ composer require skeeks/yii2-multi-language "^1.0.0"
 ```
 
 Or add this to your `composer.json` file:
@@ -19,7 +19,7 @@ Or add this to your `composer.json` file:
 ```json
 {
     "require": {
-        "skeeks/yii2-multi-language": "^0.0.1"
+        "skeeks/yii2-multi-language": "^1.0.0"
     }
 }
 ```
@@ -31,7 +31,7 @@ Use config your application
 
 "bootstrap" => ["multiLanguage"],
 
-"language" => "ru" //Your current application language
+"language" => "ru", //Your current application language
 
 "components" => [
 
