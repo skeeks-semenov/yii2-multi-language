@@ -31,6 +31,8 @@ Use config your application
 
 "bootstrap" => ["multiLanguage"],
 
+"language" => "ru" //Your current application language
+
 "components" => [
 
     "request" => [
@@ -46,7 +48,7 @@ Use config your application
     "multiLanguage" => [
         "class" => \skeeks\yii2\multiLanguage\MultiLangComponent::class,
         'langs' => ['ru', 'en'],
-        'default_lang' => 'ru',
+        'default_lang' => 'ru',         //Language to which no language settings are added.
         'lang_param_name' => 'lang',
     ]
     
