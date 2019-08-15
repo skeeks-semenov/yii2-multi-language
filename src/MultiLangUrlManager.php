@@ -98,7 +98,7 @@ class MultiLangUrlManager extends UrlManager
      * @param null         $scheme
      * @return string
      */
-    public function createAbsoluteUrl($params, $scheme = null)
+    /*public function createAbsoluteUrl($params, $scheme = null)
     {
         $tmpHostInfo = $this->hostInfo;
         $request = \Yii::$app->request;
@@ -109,7 +109,7 @@ class MultiLangUrlManager extends UrlManager
         $url = parent::createAbsoluteUrl($params, $scheme);
         $this->hostInfo = $tmpHostInfo;
         return $url;
-    }
+    }*/
 
     /**
      * @param $parsed_url

@@ -79,7 +79,7 @@ class MultiLangRequest extends Request
     /**
      * @return null|string
      */
-    public function getHostInfo()
+    /*public function getHostInfo()
     {
         $hostInfo = parent::getHostInfo();
         $this->hostInfoNoLang = $hostInfo;
@@ -89,5 +89,6 @@ class MultiLangRequest extends Request
         }
 
         return $hostInfo;
-    }
+    }*/
+    
 }
