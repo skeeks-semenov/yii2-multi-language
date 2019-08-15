@@ -74,7 +74,7 @@ class MultiLangRequest extends Request
     }
 
 
-    public $hostInfoNoLang = "";
+    //public $hostInfoNoLang = "";
 
     /**
      * @return null|string
@@ -90,5 +90,17 @@ class MultiLangRequest extends Request
 
         return $hostInfo;
     }*/
-    
+
+    /**
+     * @return string
+     * @throws InvalidConfigException
+     */
+    public function getAbsoluteUrl()
+    {
+        if ($this->_lang_from_url) {
+            return $this->getHostInfo() . "/{$this->_lang_from_url}" . $this->getUrl();
+        }
+
+        return parent::getAbsoluteUrl();
+    }
 }
